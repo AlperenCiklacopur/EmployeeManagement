@@ -1,8 +1,6 @@
 ﻿using EmployeeManagement.Data.Contracts;
 using EmployeeManagement.Data.DataContext;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using EmployeeManagement.Data.Implementaion;
 
 namespace EmployeeManagement.Data.Implementation
 {
@@ -13,21 +11,20 @@ namespace EmployeeManagement.Data.Implementation
         public UnitOfWork(EmployeeManagementContext ctx)
         {
             _ctx = ctx;
-            employeeLeaveAllocationRepository = new EmployeeLeaveAllocationRepository(_ctx);
-            employeeLeaveRequestRepository = new EmployeeLeaveRequestRepository(_ctx);
-            employeeLeaveTypeRepository = new EmployeeLeaveTypeRepository(_ctx);
+            EmployeeLeaveAllocationRepository = new EmployeeLeaveAllocationRepository(_ctx);
+            EmployeeLeaveRequestRepository = new EmployeeLeaveRequestRepository(_ctx);
+            EmployeeLeaveTypeRepository = new EmployeeLeaveTypeRepository(_ctx);
         }
-        public IEmployeeLeaveAllocationRepository employeeLeaveAllocationRepository { get; private set; }
-        public IEmployeeLeaveRequestRepository employeeLeaveRequestRepository { get; private set; }
-        public IEmployeeLeaveTypeRepository employeeLeaveTypeRepository { get; private set; }
-        public void Dispose()
-        {
-            _ctx.Dispose();
-        }
-
+        public IEmployeeLeaveAllocationRepository EmployeeLeaveAllocationRepository { get; private set; }
+        public IEmployeeLeaveRequestRepository EmployeeLeaveRequestRepository { get; private set; }
+        public IEmployeeLeaveTypeRepository EmployeeLeaveTypeRepository { get; private set; }
         public void Save()
         {
             _ctx.SaveChanges();
+        }
+        public void Dispose()
+        {
+            _ctx.Dispose();
         }
     }
 }

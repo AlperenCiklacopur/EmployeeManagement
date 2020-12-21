@@ -1,4 +1,6 @@
 using AutoMapper;
+using EmployeeManagement.BusinessEngine.Contracts;
+using EmployeeManagement.BusinessEngine.Implementation;
 using EmployeeManagement.Common.Mappings;
 using EmployeeManagement.Data.Contracts;
 using EmployeeManagement.Data.DataContext;
@@ -33,9 +35,10 @@ namespace EmployeeManagement.UI
             services.AddDbContext<EmployeeManagementContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
             services.AddAutoMapper(typeof(Maps));
-            services.AddScoped<IEmployeeLeaveAllocationRepository, EmployeeLeaveAllocationRepository>();
-            services.AddScoped<IEmployeeLeaveTypeRepository, EmployeeLeaveTypeRepository>();
-            services.AddScoped<IEmployeeLeaveRequestRepository, EmployeeLeaveRequestRepository>();
+            services.AddScoped<IEmployeeLeaveTypeBusinessEngine, EmployeeLeaveTypeBusinessEngine>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddMvc();
 
         }
 
@@ -62,6 +65,7 @@ namespace EmployeeManagement.UI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}"); 
                 endpoints.MapRazorPages();
             });
         }

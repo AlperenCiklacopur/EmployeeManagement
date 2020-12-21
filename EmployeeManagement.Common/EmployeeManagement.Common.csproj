@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EmployeeManagement.BusinessEngine\EmployeeManagement.BusinessEngine.csproj" />
     <ProjectReference Include="..\EmployeeManagement.Data\EmployeeManagement.Data.csproj" />
   </ItemGroup>
 
